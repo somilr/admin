@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+
 import './App.css';
+import MiniDrawer from './Component/Drawer';
+import { Route , Switch} from "react-router-dom";
+import Home from './Containers/Home';
+import About from './Containers/About';
+import Medicine from './Containers/Medicine';
+import Contact from './Containers/Contact';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <MiniDrawer>
+      <Switch>
+        <Route exact path={"/"} component={Home} /> 
+        <Route exact path={"/About"} component={About} />
+        <Route exact path={"/Medicine"} component={Medicine} /> 
+        <Route exact path={"/Contact"} component={Contact} /> 
+      </Switch>
+    </MiniDrawer>
+    </>
   );
 }
 
