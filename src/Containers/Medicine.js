@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
@@ -24,28 +24,16 @@ export default function Medicine() {
     setOpen(false);
   };
 
-  const handleSubmit = (value) => {
-    // console.log(values);
-    // alert(JSON.stringify(values.email));
-    let localdata = JSON.parse(localStorage.getItem("users"))
 
-    if (localdata === null) {
-      localStorage.setItem("users", JSON.stringify([value]))
-    } else {
-      localdata.push(value)
-      localStorage.setItem("users", JSON.stringify(value))
-    }
-  }
+  let medicine = {
+    name: yup.string().required('enter name'),
+    price: yup.string().required('please enter price'),
+    quantity: yup.string().required('please enter quantity'),
+    expiry: yup.string().required('please enter expiry'),
+}
 
-  let schema = yup.object().shape({
-    name: yup.string().required(),
-    price: yup.number(),
-    quantity: yup.number(),
-    expiry: yup.number(),
-    createdOn: yup.date().default(function () {
-      return new Date();
-    }),
-  });
+  
+ let schema = yup.object().shape(medicine);
 
   const formik = useFormik({
     initialValues: {
@@ -56,80 +44,103 @@ export default function Medicine() {
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
-
+      handleSubmitdata(value)
       resetForm();
     }
   })
+  
+  const handleSubmitdata = (value) => {
+    let localdata = JSON.parse(localStorage.getItem("medicine"))
+
+    let data = {
+        id: Math.floor(Math.random() * 1000),
+        ...value
+    }
+
+    if (localdata === null) {
+      localStorage.setItem("medicine", JSON.stringify([data]))
+    } else {
+      localdata.push(data)
+      localStorage.setItem("medicine", JSON.stringify(localdata))
+    }
+
+    setOpen(false);
+
+  }
 
   return (
-    
-      <Formik value={formik}>
-        <Form onSubmit={formik.handleSubmit}>
-        <Box>
-          <Container>
-            <div>
-              <Button variant="outlined" onClick={handleClickOpen}>
-                Open form dialog
-              </Button>
-              <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+
+
+    <Box>
+      <Container>
+        <div>
+          <Button variant="outlined" onClick={handleClickOpen}>
+         Add Medicine
+          </Button>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Add Medicine</DialogTitle>
+            <Formik value={formik}>
+              <Form onSubmit={formik.handleSubmit}>
                 <DialogContent>
 
-                  <TextField
-                    autoFocus
+                  <TextField             
                     margin="dense"
                     id="name"
                     label="name Address"
                     type="name"
                     fullWidth
                     variant="standard"
-                    value={formik.values.name}
-                    onBlur={formik.handleBlur}
-                  />
+                    onChange={formik.handleChange}
+                    defaultValue={formik.values.name}
+                    helperText={formik.errors.name}
+                    error={formik.errors.name ? true : false}
+                  />                  
                   <TextField
-                    autoFocus
                     margin="dense"
                     id="price"
                     label="price Address"
                     type="price"
                     fullWidth
                     variant="standard"
-                    value={formik.values.price}
-                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    defaultValue={formik.values.price}
+                    helperText={formik.errors.price}
+                    error={formik.errors.price ? true : false}
                   />
                   <TextField
-                    autoFocus
                     margin="dense"
                     id="quantity"
                     label="quantity Address"
                     fullWidth
                     variant="standard"
-                    value={formik.values.quantity}
-                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    defaultValue={formik.values.quantity}
+                    helperText={formik.errors.quantity}
+                    error={formik.errors.quantity ? true : false}
 
                   />
                   <TextField
-                    autoFocus
                     margin="dense"
                     id="expiry"
                     label="expiry Address"
                     fullWidth
                     variant="standard"
-                    value={formik.values.expiry}
-                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    defaultValue={formik.values.expiry}
+                    helperText={formik.errors.expiry}
+                    error={formik.errors.expiry ? true : false}
                   />
-
+                  <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button type="submit">Submit</Button>
+                  </DialogActions>
                 </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleSubmit}>Submit</Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </Container>
-        </Box>
-      </Form>
-    </Formik>
-    
+              </Form>
+            </Formik>
+          </Dialog>
+        </div>
+      </Container>
+    </Box>
+
   )
 }
