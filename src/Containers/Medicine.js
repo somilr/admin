@@ -1,5 +1,5 @@
 // import Dialog  from './Dialog'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -11,10 +11,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
+import { DataGrid } from '@mui/x-data-grid';
+
 
 
 export default function Medicine() {
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState([])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,10 +33,10 @@ export default function Medicine() {
     price: yup.string().required('please enter price'),
     quantity: yup.string().required('please enter quantity'),
     expiry: yup.string().required('please enter expiry'),
-}
+  }
 
-  
- let schema = yup.object().shape(medicine);
+
+  let schema = yup.object().shape(medicine);
 
   const formik = useFormik({
     initialValues: {
@@ -48,16 +51,16 @@ export default function Medicine() {
       resetForm();
     }
   })
-  
+
   const handleSubmitdata = (value) => {
     let localdata = JSON.parse(localStorage.getItem("medicine"))
 
     let data = {
-        id: Math.floor(Math.random() * 1000),
-        ...value
+      id: Math.floor(Math.random() * 1000),
+      ...value
     }
 
-    if (localdata === null) {
+    if (localdata === null) {   
       localStorage.setItem("medicine", JSON.stringify([data]))
     } else {
       localdata.push(data)
@@ -65,28 +68,60 @@ export default function Medicine() {
     }
 
     setOpen(false);
+    loadData()
 
   }
 
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'price', headerName: ' Price', width: 130 },
+    { field: 'quantity', headerName: 'Quantity', width: 130 },
+    { field: 'expiry', headerName: 'Expiry', width: 130 },
+  ];
+
+  const loadData = () => {
+    let localData = JSON.parse(localStorage.getItem("medicine"))
+
+    if (localData !== null) {
+      setData(localData)
+    }
+  }
+
+  useEffect(
+    () => {
+      loadData()
+    },
+  [])
+
   return (
 
-
+  
     <Box>
       <Container>
         <div>
           <Button variant="outlined" onClick={handleClickOpen}>
-         Add Medicine
+            Add Medicine
           </Button>
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={data}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              checkboxSelection
+            />
+          </div>
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Add Medicine</DialogTitle>
             <Formik value={formik}>
               <Form onSubmit={formik.handleSubmit}>
                 <DialogContent>
 
-                  <TextField             
+                  <TextField
                     margin="dense"
                     id="name"
-                    label="name Address"
+                    label="name"
                     type="name"
                     fullWidth
                     variant="standard"
@@ -94,11 +129,11 @@ export default function Medicine() {
                     defaultValue={formik.values.name}
                     helperText={formik.errors.name}
                     error={formik.errors.name ? true : false}
-                  />                  
+                  />
                   <TextField
                     margin="dense"
                     id="price"
-                    label="price Address"
+                    label="price"
                     type="price"
                     fullWidth
                     variant="standard"
@@ -110,7 +145,7 @@ export default function Medicine() {
                   <TextField
                     margin="dense"
                     id="quantity"
-                    label="quantity Address"
+                    label="quantity"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
@@ -122,7 +157,7 @@ export default function Medicine() {
                   <TextField
                     margin="dense"
                     id="expiry"
-                    label="expiry Address"
+                    label="expiry"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
