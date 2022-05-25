@@ -18,6 +18,7 @@ import CreateIcon from '@mui/icons-material/Create';
 export default function Medicine() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
+  const [Update, setUpdate] = useState([])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,19 +42,41 @@ export default function Medicine() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      price: '',
-      quantity: '',
+      price:'',
+      quantity:'',
       expiry: ''
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
-      handleSubmitdata(value)
+      if(Update) {
+        handleupdate(value)
+      } else {
+        handleSubmitdata(value)
+      }
       resetForm();
     }
   })
 
+  const handleupdate = (value) => {
+    let localdata = JSON.parse(localStorage.getItem("medicine"));
+    
+    let udata = localdata.map((l, i) => {
+      if(l.id === value.id) {
+          return value;
+      } else {
+        return l;
+      }
+    })
+    console.log(udata);
+
+    localStorage.setItem("medicine", JSON.stringify(udata))
+    setOpen(false)
+    setUpdate()
+    loadData()
+  }
+
   const handleSubmitdata = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("medicine"))
+    let localdata = JSON.parse(localStorage.getItem("medicine"));
 
     let data = {
       id: Math.floor(Math.random() * 1000),
@@ -92,7 +115,7 @@ export default function Medicine() {
       field: 'edit', headerName: 'Edit', width: 130,
       renderCell: (params) => (
         <>
-          <IconButton aria-label="edit" onClick={() => handleEdit(params.row.id)}>
+          <IconButton aria-label="edit" onClick={() => handleEdit(params.row)}>
             <CreateIcon />
           </IconButton>
         </>
@@ -100,8 +123,11 @@ export default function Medicine() {
     }
   ];
 
-  const handleEdit = () => {
-
+  const handleEdit = (data) => {
+    setOpen(true);
+    setUpdate(data);
+    formik.setValues(data);
+    // console.log(data);
   }
 
   const handleDelete = (id) => {
@@ -206,7 +232,12 @@ export default function Medicine() {
                   />
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Submit</Button>
+                    {
+                      Update ? 
+                      <Button type="submit">Update</Button>
+                      :
+                      <Button type="submit">Submit</Button>
+                     }
                   </DialogActions>
                 </DialogContent>
               </Form>
