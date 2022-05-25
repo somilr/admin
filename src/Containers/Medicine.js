@@ -233,11 +233,11 @@ export default function Medicine() {
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     {
-                      Update ? 
+                      Update ?
                       <Button type="submit">Update</Button>
-                      :
+                       :
                       <Button type="submit">Submit</Button>
-                     }
+                    }
                   </DialogActions>
                 </DialogContent>
               </Form>
