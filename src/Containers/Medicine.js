@@ -7,6 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
@@ -17,15 +18,28 @@ import CreateIcon from '@mui/icons-material/Create';
 
 export default function Medicine() {
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState([])
-  const [Update, setUpdate] = useState([])
+  const [data, setData] = useState([]);
+  const [Update, setUpdate] = useState();
+  const [dopen, setDopen] = React.useState(false);
+  const [did, setDid] = useState()
+
+
+  const handleClickDopen = (id) => {
+    setDopen(true);
+    setDid(id);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
+    setUpdate()
+
   };
 
   const handleClose = () => {
     setOpen(false);
+    setUpdate()
+    setDopen()
+    formik.resetForm();
   };
 
 
@@ -105,7 +119,7 @@ export default function Medicine() {
       field: 'delete', headerName: 'Delete', width: 130,
       renderCell: (params) => (
         <>
-          <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
+          <IconButton aria-label="delete" onClick={() => handleClickDopen(params.row.id)}>
             <DeleteIcon />
           </IconButton>
         </>
@@ -123,6 +137,8 @@ export default function Medicine() {
     }
   ];
 
+  
+
   const handleEdit = (data) => {
     setOpen(true);
     setUpdate(data);
@@ -130,13 +146,15 @@ export default function Medicine() {
     // console.log(data);
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     let localData = JSON.parse(localStorage.getItem("medicine"))
 
-    let filterData = localData.filter((v, i) => v.id !== id);
+    let filterData = localData.filter((v, i) => v.id !== did);
 
     localStorage.setItem("medicine", JSON.stringify(filterData));
     loadData()
+    
+    setDopen(false)
   }
 
   const loadData = () => {
@@ -160,7 +178,7 @@ export default function Medicine() {
       <Container>
         <div>
           <center>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={() => handleClickOpen()}>
               Add Medicine
             </Button>
           </center>
@@ -243,6 +261,27 @@ export default function Medicine() {
               </Form>
             </Formik>
           </Dialog>
+          <div>
+      <Dialog
+        open={dopen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are You Sure Delete Medicine Data ...? "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+         
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleDelete()}>yes</Button>
+          <Button onClick={handleClose}>No</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
         </div>
       </Container>
     </Box>
