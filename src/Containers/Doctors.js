@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 
 
-export default function Medicine() {
+export default function Doctors() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([]);
   const [Update, setUpdate] = useState();
@@ -43,22 +43,22 @@ export default function Medicine() {
   };
 
 
-  let medicine = {
+  let doctors = {
     name: yup.string().required('enter name'),
-    price: yup.string().required('please enter price'),
-    quantity: yup.string().required('please enter quantity'),
-    expiry: yup.string().required('please enter expiry'),
+    salary: yup.string().required('please enter salary'),
+    degree: yup.string().required('please enter degree'),
+    experience: yup.string().required('please enter experience'),
   }
 
 
-  let schema = yup.object().shape(medicine);
+  let schema = yup.object().shape(doctors);
 
   const formik = useFormik({
     initialValues: {
       name: '',
-      price:'',
+      salary:'',
       quantity:'',
-      expiry: ''
+      experience: ''
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
@@ -72,7 +72,7 @@ export default function Medicine() {
   })
 
   const handleupdate = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("medicine"));
+    let localdata = JSON.parse(localStorage.getItem("doctors"));
     
     let udata = localdata.map((l, i) => {
       if(l.id === value.id) {
@@ -83,14 +83,14 @@ export default function Medicine() {
     })
     console.log(udata);
 
-    localStorage.setItem("medicine", JSON.stringify(udata))
+    localStorage.setItem("doctors", JSON.stringify(udata))
     setOpen(false)
     setUpdate()
     loadData()
   }
 
   const handleSubmitdata = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("medicine"));
+    let localdata = JSON.parse(localStorage.getItem("doctors"));
 
     console.log(localdata);
     let data = {
@@ -99,10 +99,10 @@ export default function Medicine() {
     }
 
     if (localdata === null) {
-      localStorage.setItem("medicine", JSON.stringify([data]))
+      localStorage.setItem("doctors", JSON.stringify([data]))
     } else {
       localdata.push(data)
-      localStorage.setItem("medicine", JSON.stringify(localdata))
+      localStorage.setItem("doctors", JSON.stringify(localdata))
     }
 
     setOpen(false);
@@ -113,9 +113,9 @@ export default function Medicine() {
   const columns = [
 
     { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'price', headerName: ' Price', width: 130 },
-    { field: 'quantity', headerName: 'Quantity', width: 130 },
-    { field: 'expiry', headerName: 'Expiry', width: 130 },
+    { field: 'salary', headerName: ' Salary', width: 130 },
+    { field: 'degree', headerName: 'Degree', width: 130 },
+    { field: 'experience', headerName: 'Experience', width: 130 },
     {
       field: 'delete', headerName: 'Delete', width: 130,
       renderCell: (params) => (
@@ -148,18 +148,18 @@ export default function Medicine() {
   }
 
   const handleDelete = () => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
+    let localData = JSON.parse(localStorage.getItem("doctors"))
 
     let filterData = localData.filter((v, i) => v.id !== did);
 
-    localStorage.setItem("medicine", JSON.stringify(filterData));
+    localStorage.setItem("doctors", JSON.stringify(filterData));
     loadData()
     
     setDopen(false)
   }
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
+    let localData = JSON.parse(localStorage.getItem("doctors"))
 
     if (localData !== null) {
       setData(localData)
@@ -180,7 +180,7 @@ export default function Medicine() {
         <div>
           <center>
             <Button variant="outlined" onClick={() => handleClickOpen()}>
-              Add Medicine
+              Add Doctors
             </Button>
           </center>
           <div style={{ height: 400, width: '100%' }}>
@@ -194,7 +194,7 @@ export default function Medicine() {
 
           </div>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add Medicine</DialogTitle>
+            <DialogTitle>Add doctors</DialogTitle>
             <Formik value={formik}>
               <Form onSubmit={formik.handleSubmit}>
                 <DialogContent>
@@ -215,38 +215,38 @@ export default function Medicine() {
 
                   <TextField
                     margin="dense"
-                    id="price"
-                    label="price"
-                    type="price"
+                    id="salary"
+                    label="salary"
+                    type="salary"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
-                    defaultValue={formik.values.price}
-                    helperText={formik.errors.price}
-                    error={formik.errors.price ? true : false}
+                    defaultValue={formik.values.salary}
+                    helperText={formik.errors.salary}
+                    error={formik.errors.salary ? true : false}
                   />
                   <TextField
                     margin="dense"
-                    id="quantity"
-                    label="quantity"
+                    id="degree"
+                    label="degree"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
-                    defaultValue={formik.values.quantity}
-                    helperText={formik.errors.quantity}
-                    error={formik.errors.quantity ? true : false}
+                    defaultValue={formik.values.degree}
+                    helperText={formik.errors.degree}
+                    error={formik.errors.degree ? true : false}
 
                   />
                   <TextField
                     margin="dense"
-                    id="expiry"
-                    label="expiry"
+                    id="experience"
+                    label="experience"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
-                    defaultValue={formik.values.expiry}
-                    helperText={formik.errors.expiry}
-                    error={formik.errors.expiry ? true : false}
+                    defaultValue={formik.values.experience}
+                    helperText={formik.errors.experience}
+                    error={formik.errors.experience ? true : false}
                   />
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
@@ -269,7 +269,7 @@ export default function Medicine() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Are You Sure Delete Medicine Data ...? "}
+          {"Are You Sure Delete doctors Data ...? "}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -288,3 +288,8 @@ export default function Medicine() {
 
   )
 }
+
+// name: '',
+// salary: '',
+// degree: '',
+// experience:''
