@@ -14,6 +14,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
+import { Medicinedata } from '../redux/action/medicine.action';
+import { useDispatch } from 'react-redux';
 
 
 export default function Medicine() {
@@ -22,6 +24,7 @@ export default function Medicine() {
   const [Update, setUpdate] = useState();
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
+
 
 
   const handleClickDopen = (id) => {
@@ -166,8 +169,11 @@ export default function Medicine() {
     }
   }
 
+  const dispatch = useDispatch();
+
   useEffect(
     () => {
+      dispatch(Medicinedata())
       loadData()
     },
     [])

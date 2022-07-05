@@ -1,0 +1,43 @@
+{
+  "medicines": [
+    {
+      "id": 2,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 3,
+      "title": "demo",
+      "author": "typicode"
+    },
+    {
+      "id": 5,
+      "name": "somil",
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "doctors": [
+    {
+      "id": 5,
+      "name": "khusal",
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 5,
+      "name": "ravi",
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 5,
+      "name": "milan",
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

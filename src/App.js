@@ -7,11 +7,17 @@ import About from './Containers/About';
 import Medicine from './Containers/Medicine';
 import Contact from './Containers/Contact';
 import Doctors from './Containers/Doctors';
+import {Provider} from "react-redux"
+import { configureStore } from "./redux/Store";
+import Counter from './Containers/Counter/Counter';
+
 
 
 function App() {
+  const store = configureStore()
   return (
     <>
+    <Provider store={store}>
     <MiniDrawer>
       <Switch>
         <Route exact path={"/"} component={Home} /> 
@@ -19,8 +25,10 @@ function App() {
         <Route exact path={"/Medicine"} component={Medicine} /> 
         <Route exact path={"/Contact"} component={Contact} /> 
         <Route exact path={"/Doctors"} component={Doctors} />
+        <Route exact path={"/Contact"} component={Counter} />
       </Switch>
     </MiniDrawer>
+    </Provider>
     </>
   );
 }

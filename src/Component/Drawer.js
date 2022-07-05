@@ -23,6 +23,7 @@ import BloodtypeIcon from '@mui/icons-material/Bloodtype';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import MedicationIcon from '@mui/icons-material/Medication';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
 const drawerWidth = 240;
 
@@ -108,7 +109,8 @@ export default function MiniDrawer({children}) {
     { lable: 'About', icon:<MailIcon />, to:"/About"},
     { lable: 'Medicine', icon:<BloodtypeIcon/>, to:"/Medicine" },
     { lable: 'Contact', icon:<ContactPageIcon/>, to:"/Contact"},
-    { lable: 'Doctors', icon:<MedicationIcon/>, to:"/Doctors"}
+    { lable: 'Doctors', icon:<MedicationIcon/>, to:"/Doctors"},
+    { lable: 'Counter', icon:<HourglassBottomIcon/>, to:"/Counter"}
   ]
 
   return (
