@@ -2,8 +2,14 @@ import { BASE_URL } from "../../baseUrl";
 import * as ActionTypes from "../ActionType"
 
 export const Medicinedata = () => (dispatch) => {
+  
     try{
-    fetch(BASE_URL + 'medicines')
+      setTimeout(function() {
+
+        dispatch(loadingMedicine())
+        
+
+        fetch(BASE_URL + 'medicines')
     .then(response => {
         if (response.ok) {
           return response;
@@ -19,9 +25,14 @@ export const Medicinedata = () => (dispatch) => {
         })
       .then(response => response.json())
       .then(medicines => dispatch({ type: ActionTypes.GET_MEDICINE, payload: medicines }))
+      },2000)
+    
+     
     }catch (error) {
         console.log(error);
-    }
-    
-      
+    }    
+}
+
+export const loadingMedicine = () => (dispatch) => {
+dispatch({ type: ActionTypes.LOADING_MEDICINE})
 }

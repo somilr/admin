@@ -15,7 +15,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { Medicinedata } from '../redux/action/medicine.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
+import { useSelect } from '@mui/base';
 
 
 export default function Medicine() {
@@ -23,9 +24,10 @@ export default function Medicine() {
   const [data, setData] = useState([]);
   const [Update, setUpdate] = useState();
   const [dopen, setDopen] = React.useState(false);
-  const [did, setDid] = useState()
+  const [did, setDid] = useState();
 
-
+  const medicines = useSelector  (state =>state.medicine)
+  console.log(medicines);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -183,7 +185,10 @@ export default function Medicine() {
 
     <Box>
       <Container>
-        <div>
+          {
+            medicines.isLoading ? 
+            <p>Loading....</p> :
+            <div>
           <center>
             <Button variant="outlined" onClick={() => handleClickOpen()}>
               Add Medicine
@@ -191,7 +196,7 @@ export default function Medicine() {
           </center>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-              rows={data}
+              rows={medicines.medicine}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}
@@ -288,7 +293,9 @@ export default function Medicine() {
         </DialogActions>
       </Dialog>
     </div>
-        </div>
+            </div>
+          }
+          
       </Container>
     </Box>
 

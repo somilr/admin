@@ -2,5 +2,6 @@ export const INCREMENT_COUNTER = "INCREMENT_COUNTER"
 export const DECREMENT_COUNTER = "DECREMENT_COUNTER"
 
 export const GET_MEDICINE = "GET_MEDICINE"
+export const LOADING_MEDICINE = "LOADING_MEDICINE"
 
-export const 
+export const GET_DOCTORS = "GET_DOCTORS"

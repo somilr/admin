@@ -2,19 +2,21 @@
   "medicines": [
     {
       "id": 2,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "abc",
+      "price": 120,
+      "expiry": 2014
     },
     {
       "id": 3,
-      "title": "demo",
-      "author": "typicode"
+      "name": "demo",
+      "price": 321,
+      "expiry": 2015
     },
     {
       "id": 5,
       "name": "somil",
-      "title": "json-server",
-      "author": "typicode"
+      "price": 321,
+      "expiry": 2016
     }
   ],
   "doctors": [

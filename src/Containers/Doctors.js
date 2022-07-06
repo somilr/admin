@@ -14,6 +14,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
+import { Doctorsdata } from '../redux/action/doctors.action';
+import { useDispatch } from 'react-redux';
 
 
 export default function Doctors() {
@@ -166,8 +168,11 @@ export default function Doctors() {
     }
   }
 
+  const dispatch = useDispatch();
+
   useEffect(
     () => {
+      dispatch(Doctorsdata())
       loadData()
     },
     [])
