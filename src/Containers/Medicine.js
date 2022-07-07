@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { Medicinedata } from '../redux/action/medicine.action';
 import { useDispatch , useSelector} from 'react-redux';
-import { useSelect } from '@mui/base';
+
 
 
 export default function Medicine() {
@@ -182,12 +182,17 @@ export default function Medicine() {
 
   return (
 
-
-    <Box>
-      <Container>
+    <>
+  
           {
             medicines.isLoading ? 
-            <p>Loading....</p> :
+            <p>Loading....</p> 
+            :
+            (medicines.error !== '' ?
+            <p>{medicines.error}</p> 
+            :
+            <Box>
+            <Container>
             <div>
           <center>
             <Button variant="outlined" onClick={() => handleClickOpen()}>
@@ -294,10 +299,10 @@ export default function Medicine() {
       </Dialog>
     </div>
             </div>
-          }
-          
-      </Container>
-    </Box>
-
+            </Container>
+            </Box>
+            )
+          } 
+    </>
   )
 }
