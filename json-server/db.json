@@ -17,26 +17,30 @@
       "name": "somil",
       "price": 321,
       "expiry": 2016
+    },
+    {
+      "id": 735,
+      "name": "xyz",
+      "price": "1",
+      "quantity": "2",
+      "expiry": "3"
     }
   ],
   "doctors": [
     {
       "id": 5,
       "name": "khusal",
-      "title": "json-server",
-      "author": "typicode"
+      "salary": 12500
     },
     {
       "id": 5,
       "name": "ravi",
-      "title": "json-server",
-      "author": "typicode"
+      "salary": 20000
     },
     {
       "id": 5,
       "name": "milan",
-      "title": "json-server",
-      "author": "typicode"
+      "salary": 14200
     }
   ],
   "profile": {

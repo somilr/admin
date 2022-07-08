@@ -15,7 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { Doctorsdata } from '../redux/action/doctors.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function Doctors() {
@@ -25,6 +25,8 @@ export default function Doctors() {
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
 
+  const Doctors = useSelector(state => state.doctors)
+  console.log(Doctors);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -189,8 +191,8 @@ export default function Doctors() {
             </Button>
           </center>
           <div style={{ height: 400, width: '100%' }}>
-            <DataGrid
-              rows={data}
+            <datagrid
+              rows={Doctors?.doctors}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}

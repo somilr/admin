@@ -3,7 +3,7 @@ import * as ActionTypes from "../ActionType"
 
 export const Doctorsdata = () => (dispatch) => {
     try{
-        fetch(BASE_URL + 'Doctors')
+        fetch(BASE_URL + 'doctors')
         .then(response => {
             if (response.ok) {
               return response;

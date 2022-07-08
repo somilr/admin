@@ -6,37 +6,37 @@ const initalState = {
     error: ''
 }
 
-export const medicineReducer = (state=initalState, action) => {
+export const medicineReducer = (state = initalState, action) => {
     // console.log(action.type, action.payload);
-    
-    switch(action.type) {
+
+    switch (action.type) {
         case ActionTypes.LOADING_MEDICINE:
             return {
                 ...state,
-               isLoading: true,
-               error:''
+                isLoading: true,
+                error: ''
             }
         case ActionTypes.GET_MEDICINE:
             return {
                 ...state,
-               isLoading: false,
-               medicine: action.payload,
-               error:''
+                isLoading: false,
+                medicine: action.payload,
+                error: ''
             }
         case ActionTypes.POST_MEDICINE:
-                return {
-                    ...state,
-                   isLoading: false,
-                   medicine: state.medicine.concat(action.payload),
-                   error:''
-                }
+            return {
+                ...state,
+                isLoading: false,
+                medicine: state.medicine.concat(action.payload),
+                error: ''
+            }
         case ActionTypes.ERROR_MEDICINE:
-                return {
-                    ...state,
-                   isLoading: false,
-                   medicine: [],
-                   error: action.payload
-                }
+            return {
+                ...state,
+                isLoading: false,
+                medicine: [],
+                error: action.payload
+            }
         default:
             return state;
     }
