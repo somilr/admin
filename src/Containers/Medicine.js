@@ -14,7 +14,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
-import { Medicinedata, postMedicine } from '../redux/action/medicine.action';
+import { deleteMedicine, Medicinedata, postMedicine } from '../redux/action/medicine.action';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -25,9 +25,9 @@ export default function Medicine() {
   const [Update, setUpdate] = useState();
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState();
-
   const medicines = useSelector(state => state.medicine)
   console.log(medicines);
+  console.log('delete',medicines.medicine);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -155,22 +155,25 @@ export default function Medicine() {
   }
 
   const handleDelete = () => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
+    // let localData = JSON.parse(localStorage.getItem("medicine"))
 
-    let filterData = localData.filter((v, i) => v.id !== did);
+    // let filterData = localData.filter((v, i) => v.id !== did);
 
-    localStorage.setItem("medicine", JSON.stringify(filterData));
-    loadData()
+    // localStorage.setItem("medicine", JSON.stringify(filterData));
 
+    dispatch(deleteMedicine(did))
+    
     setDopen(false)
+    // loadData()
   }
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
+    // let localData = JSON.parse(localStorage.getItem("medicine"))
 
-    if (localData !== null) {
-      setData(localData)
-    }
+    // if (localData !== null) {
+    //   setData(localData)
+    // }
+      setData(medicines.medicine)
   }
 
   const dispatch = useDispatch();

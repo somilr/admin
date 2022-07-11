@@ -27,7 +27,7 @@ export const Medicinedata = () => (dispatch) => {
 
 
   } catch (error) {
-    dispatch(errorMedicine(error))
+    dispatch(errorMedicine(error.message))
     console.log(error);
   }
 }
@@ -62,6 +62,32 @@ export const postMedicine = (data) => (dispatch) => {
         .then(medicines => dispatch({ type: ActionTypes.POST_MEDICINE, payload: medicines }))
         .catch(error => dispatch(errorMedicine(error.message)))
     }, 2000)
+  } catch (error) {
+    dispatch(errorMedicine(error))
+  }
+}
+
+export const deleteMedicine = (id) => (dispatch) => {
+  try {
+    fetch(BASE_URL + 'medicines/' + id , {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+      error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      })
+    .then(response => response.json())
+    .then(dispatch({ type: ActionTypes.DELETE_MEDICINE, payload: id }))
+    .catch(error => dispatch(errorMedicine(error.message)))
   } catch (error) {
     dispatch(errorMedicine(error))
   }
