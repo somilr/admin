@@ -1,25 +1,18 @@
 {
   "medicines": [
     {
-      "id": 947,
-      "name": "vsdfvg",
-      "price": "654",
-      "quantity": "1",
-      "expiry": "2023"
+      "id": 595,
+      "name": "vfcxf1111",
+      "price": "321111",
+      "quantity": "21111",
+      "expiry": "20001111"
     },
     {
-      "id": 382,
-      "name": "gdf",
-      "price": "45",
-      "quantity": "1",
-      "expiry": "54"
-    },
-    {
-      "id": 65,
-      "name": "vsdfvg",
-      "price": "654",
-      "quantity": "1",
-      "expiry": "2023"
+      "id": 708,
+      "name": "asdfsd22",
+      "price": "3222",
+      "quantity": "5422",
+      "expiry": "456222"
     }
   ],
   "doctors": [
