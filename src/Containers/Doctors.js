@@ -170,11 +170,11 @@ export default function Doctors() {
     }
   }
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(
     () => {
-      dispatch(Doctorsdata())
+      // dispatch(Doctorsdata())
       loadData()
     },
     [])
@@ -192,7 +192,7 @@ export default function Doctors() {
           </center>
           <div style={{ height: 400, width: '100%' }}>
             <datagrid
-              rows={Doctors?.doctors}
+              rows={data}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}

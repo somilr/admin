@@ -208,6 +208,15 @@ export default function Medicine() {
                       Add Medicine
                     </Button>
                   </center>
+                  {/* <div className='form-group mt-3 col-lg-12'>
+                      <TextField
+                      type="text"
+                      id="search"
+                      label="search"
+                      variant='standard'
+                      onChange={(e) => handleSearch(e.target.value)}
+                      />
+                  </div> */}
                   <div style={{ height: 400, width: '100%' }}>
                     <DataGrid
                       rows={medicines.medicine}
