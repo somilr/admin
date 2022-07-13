@@ -20,6 +20,13 @@
       "price": "32",
       "quantity": "2",
       "expiry": "2000"
+    },
+    {
+      "id": 147,
+      "name": "Hirpara prayag1",
+      "price": "12101",
+      "quantity": "11",
+      "expiry": "20231"
     }
   ],
   "doctors": [

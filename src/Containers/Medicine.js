@@ -25,9 +25,10 @@ export default function Medicine() {
   const [Update, setUpdate] = useState();
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState();
+  
   const medicines = useSelector(state => state.medicine)
-  console.log(medicines);
-  console.log('delete',medicines.medicine);
+  // console.log(medicines);
+  // console.log('delete',medicines.medicine);
 
   const handleClickDopen = (id) => {
     setDopen(true);

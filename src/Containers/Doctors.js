@@ -25,8 +25,8 @@ export default function Doctors() {
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
 
-  const Doctors = useSelector(state => state.doctors)
-  console.log(Doctors);
+  const doctordata = useSelector(state => state.doctors)
+  console.log(doctordata.isLoading);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -163,18 +163,20 @@ export default function Doctors() {
   }
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("doctors"))
+    // let localData = JSON.parse(localStorage.getItem("doctors"))
 
-    if (localData !== null) {
-      setData(localData)
-    }
+    // if (localData !== null) {
+    //   setData(localData)
+    // }
+    
+    setData(doctordata.doctors)
   }
 
-  // const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   useEffect(
     () => {
-      // dispatch(Doctorsdata())
+       dispatch(Doctorsdata())
       loadData()
     },
     [])
@@ -191,8 +193,8 @@ export default function Doctors() {
             </Button>
           </center>
           <div style={{ height: 400, width: '100%' }}>
-            <datagrid
-              rows={data}
+            <DataGrid
+              rows={Doctors.doctors}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}
