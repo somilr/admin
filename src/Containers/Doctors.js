@@ -14,7 +14,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
-import { Doctorsdata } from '../redux/action/doctors.action';
+import { deleteDoctors, Doctorsdata, editDotors, postDoctors } from '../redux/action/doctors.action';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -25,8 +25,8 @@ export default function Doctors() {
   const [dopen, setDopen] = React.useState(false);
   const [did, setDid] = useState()
 
-  const doctordata = useSelector(state => state.doctors)
-  console.log(doctordata.isLoading);
+  const doctorda = useSelector(state => state.doctors)
+  console.log(doctorda.isLoading);
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -76,38 +76,43 @@ export default function Doctors() {
   })
 
   const handleupdate = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("doctors"));
+    // let localdata = JSON.parse(localStorage.getItem("doctors"));
     
-    let udata = localdata.map((l, i) => {
-      if(l.id === value.id) {
-          return value;
-      } else {
-        return l;
-      }
-    })
-    console.log(udata);
+    // let udata = localdata.map((l, i) => {
+    //   if(l.id === value.id) {
+    //       return value;
+    //   } else {
+    //     return l;
+    //   }
+    // })
+    // console.log(udata);
 
-    localStorage.setItem("doctors", JSON.stringify(udata))
+    // localStorage.setItem("doctors", JSON.stringify(udata))
+
+    dispatch(editDotors(value));
+
     setOpen(false)
     setUpdate()
     loadData()
   }
 
   const handleSubmitdata = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("doctors"));
+    // let localdata = JSON.parse(localStorage.getItem("doctors"));
 
-    console.log(localdata);
+    // console.log(localdata);
     let data = {
       id: Math.floor(Math.random() * 1000),
       ...value
     }
 
-    if (localdata === null) {
-      localStorage.setItem("doctors", JSON.stringify([data]))
-    } else {
-      localdata.push(data)
-      localStorage.setItem("doctors", JSON.stringify(localdata))
-    }
+    // if (localdata === null) {
+    //   localStorage.setItem("doctors", JSON.stringify([data]))
+    // } else {
+    //   localdata.push(data)
+    //   localStorage.setItem("doctors", JSON.stringify(localdata))
+    // }
+
+    dispatch(postDoctors(value))
 
     setOpen(false);
     loadData()
@@ -152,13 +157,15 @@ export default function Doctors() {
   }
 
   const handleDelete = () => {
-    let localData = JSON.parse(localStorage.getItem("doctors"))
+    // let localData = JSON.parse(localStorage.getItem("doctors"))
 
-    let filterData = localData.filter((v, i) => v.id !== did);
+    // let filterData = localData.filter((v, i) => v.id !== did);
 
-    localStorage.setItem("doctors", JSON.stringify(filterData));
-    loadData()
-    
+    // localStorage.setItem("doctors", JSON.stringify(filterData));
+
+    dispatch(deleteDoctors(did))
+
+    loadData() 
     setDopen(false)
   }
 
@@ -169,7 +176,7 @@ export default function Doctors() {
     //   setData(localData)
     // }
     
-    setData(doctordata.doctors)
+    setData(doctorda.doctors)
   }
 
    const dispatch = useDispatch();
@@ -194,7 +201,7 @@ export default function Doctors() {
           </center>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-              rows={Doctors.doctors}
+              rows={doctorda.doctors}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}

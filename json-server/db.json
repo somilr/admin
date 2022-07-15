@@ -1,13 +1,6 @@
 {
   "medicines": [
     {
-      "id": 595,
-      "name": "vfcxf1111",
-      "price": "321111",
-      "quantity": "21111",
-      "expiry": "20001111"
-    },
-    {
       "id": 708,
       "name": "asdfsd22",
       "price": "3222",
@@ -27,23 +20,62 @@
       "price": "12101",
       "quantity": "11",
       "expiry": "20231"
+    },
+    {
+      "id": 768,
+      "name": "azdsd",
+      "price": "34",
+      "quantity": "34",
+      "expiry": "4"
+    },
+    {
+      "id": 73,
+      "name": "azdsd1",
+      "price": "11",
+      "quantity": "11",
+      "expiry": "11"
     }
   ],
   "doctors": [
     {
-      "id": 5,
-      "name": "khusal",
-      "salary": 12500
+      "name": "azdsd",
+      "salary": "rtre",
+      "quantity": "",
+      "experience": "rtrde",
+      "degree": "rtr",
+      "id": 6
     },
     {
-      "id": 5,
-      "name": "ravi",
-      "salary": 20000
+      "name": "somil",
+      "salary": "3423",
+      "quantity": "",
+      "experience": "3423",
+      "degree": "frgdf",
+      "id": 52
     },
     {
-      "id": 5,
-      "name": "milan",
-      "salary": 14200
+      "name": "asdfghj",
+      "salary": "142001",
+      "quantity": "",
+      "experience": "1",
+      "degree": "1",
+      "id": 53
+    },
+    {
+      "name": "azdsd",
+      "salary": "142001",
+      "quantity": "",
+      "experience": "erw",
+      "degree": "frgdf",
+      "id": 54
+    },
+    {
+      "name": "somil",
+      "salary": "1",
+      "quantity": "",
+      "experience": "1",
+      "degree": "1",
+      "id": 55
     }
   ],
   "profile": {

@@ -1,29 +1,33 @@
 import { BASE_URL } from "../../baseUrl";
+import { getMedicinedata } from "../../common/apis/medicine.api";
 import * as ActionTypes from "../ActionType"
 
 export const Medicinedata = () => (dispatch) => {
   try {
     dispatch(loadingMedicine())
 
-    setTimeout(function () {
-      fetch(BASE_URL + 'medicines')
-        .then(response => {
-          if (response.ok) {
-            return response;
-          } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-          }
-        },
-          error => {
-            var errmess = new Error(error.message);
-            throw errmess;
-          })
-        .then(response => response.json())
-        .then(medicines => dispatch({ type: ActionTypes.GET_MEDICINE, payload: medicines }))
-        .catch(error => dispatch(errorMedicine(error.message)))
-    }, 2000)
+    getMedicinedata()
+    .then((data)=> dispatch({ type: ActionTypes.GET_MEDICINE, payload: data.data }))
+
+    // setTimeout(function () {
+    //   fetch(BASE_URL + 'medicines')
+    //     .then(response => {
+    //       if (response.ok) {
+    //         return response;
+    //       } else {
+    //         var error = new Error('Error ' + response.status + ': ' + response.statusText);
+    //         error.response = response;
+    //         throw error;
+    //       }
+    //     },
+    //       error => {
+    //         var errmess = new Error(error.message);
+    //         throw errmess;
+    //       })
+    //     .then(response => response.json())
+    //     .then(medicines => dispatch({ type: ActionTypes.GET_MEDICINE, payload: medicines }))
+    //     .catch(error => dispatch(errorMedicine(error.message)))
+    // }, 2000)
 
 
   } catch (error) {
@@ -37,31 +41,34 @@ export const postMedicine = (data) => (dispatch) => {
 
     dispatch(loadingMedicine())
 
-    setTimeout(function () {
-      fetch(BASE_URL + 'medicines', {
-        method: 'POST', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then(response => {
-          if (response.ok) {
-            return response;
-          } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-          }
-        },
-          error => {
-            var errmess = new Error(error.message);
-            throw errmess;
-          })
-        .then(response => response.json())
-        .then(medicines => dispatch({ type: ActionTypes.POST_MEDICINE, payload: medicines }))
-        .catch(error => dispatch(errorMedicine(error.message)))
-    }, 2000)
+    getMedicinedata(data)
+    .then((data)=> dispatch({ type: ActionTypes.POST_MEDICINE, payload: data.data }))
+
+    // setTimeout(function () {
+    //   fetch(BASE_URL + 'medicines', {
+    //     method: 'POST', // or 'PUT'
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(data),
+    //   })
+    //     .then(response => {
+    //       if (response.ok) {
+    //         return response;
+    //       } else {
+    //         var error = new Error('Error ' + response.status + ': ' + response.statusText);
+    //         error.response = response;
+    //         throw error;
+    //       }
+    //     },
+    //       error => {
+    //         var errmess = new Error(error.message);
+    //         throw errmess;
+    //       })
+    //     .then(response => response.json())
+    //     .then(medicines => dispatch({ type: ActionTypes.POST_MEDICINE, payload: medicines }))
+    //     .catch(error => dispatch(errorMedicine(error.message)))
+    // }, 2000)
   } catch (error) {
     dispatch(errorMedicine(error))
   }
