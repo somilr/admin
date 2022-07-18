@@ -1,39 +1,18 @@
 {
   "medicines": [
     {
-      "id": 708,
-      "name": "asdfsd22",
-      "price": "3222",
-      "quantity": "5422",
-      "expiry": "456222"
+      "id": 954,
+      "name": "a11",
+      "price": "111",
+      "quantity": "2311",
+      "expiry": "411"
     },
     {
-      "id": 739,
-      "name": "somil",
-      "price": "32",
+      "id": 772,
+      "name": "s",
+      "price": "1",
       "quantity": "2",
-      "expiry": "2000"
-    },
-    {
-      "id": 147,
-      "name": "Hirpara prayag1",
-      "price": "12101",
-      "quantity": "11",
-      "expiry": "20231"
-    },
-    {
-      "id": 768,
-      "name": "azdsd",
-      "price": "34",
-      "quantity": "34",
-      "expiry": "4"
-    },
-    {
-      "id": 73,
-      "name": "azdsd1",
-      "price": "11",
-      "quantity": "11",
-      "expiry": "11"
+      "expiry": "3"
     }
   ],
   "doctors": [
@@ -52,30 +31,6 @@
       "experience": "3423",
       "degree": "frgdf",
       "id": 52
-    },
-    {
-      "name": "asdfghj",
-      "salary": "142001",
-      "quantity": "",
-      "experience": "1",
-      "degree": "1",
-      "id": 53
-    },
-    {
-      "name": "azdsd",
-      "salary": "142001",
-      "quantity": "",
-      "experience": "erw",
-      "degree": "frgdf",
-      "id": 54
-    },
-    {
-      "name": "somil",
-      "salary": "1",
-      "quantity": "",
-      "experience": "1",
-      "degree": "1",
-      "id": 55
     }
   ],
   "profile": {

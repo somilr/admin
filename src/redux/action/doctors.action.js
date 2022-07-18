@@ -6,28 +6,28 @@ export const Doctorsdata = () => (dispatch) => {
   try {
     dispatch(loadingDoctors())
 
-    getDoctorsdata()
-    .then(data => dispatch({ type: ActionTypes.GET_DOCTORS, payload: data.data }))
+    // getDoctorsdata()
+    // .then(data => dispatch({ type: ActionTypes.GET_DOCTORS, payload: data.data }))
 
-    // setTimeout(function () {
-    //   fetch(BASE_URL + 'doctors')
-    //     .then(response => {
-    //       if (response.ok) {
-    //         return response;
-    //       } else {
-    //         var error = new Error('Error ' + response.status + ': ' + response.statusText);
-    //         error.response = response;
-    //         throw error;
-    //       }
-    //     },
-    //       error => {
-    //         var errmess = new Error(error.message);
-    //         throw errmess;
-    //       })
-    //     .then(response => response.json())
-    //     .then(doctors => dispatch({ type: ActionTypes.GET_DOCTORS, payload: doctors }))
-    //     .catch(error => dispatch(errorDoctors(error.message)))
-    // }, 2000)
+    setTimeout(function () {
+      fetch(BASE_URL + 'doctors')
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+          }
+        },
+          error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+          })
+        .then(response => response.json())
+        .then(doctors => dispatch({ type: ActionTypes.GET_DOCTORS, payload: doctors }))
+        .catch(error => dispatch(errorDoctors(error.message)))
+    }, 2000)
 
 
   } catch (error) {
