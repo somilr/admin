@@ -1,4 +1,4 @@
-import { deleteReuest, editReuest, getReuest, postReuest } from "../request"
+import { deleteReuest, getReuest, postReuest, putReuest } from "../request"
 
 
 export const getMedicinedata = (data) => {
@@ -13,3 +13,6 @@ export const deleteMedicinedata = (id) => {
     return deleteReuest('medicines/', id)
 }
 
+export const editMedicinedata = (data) => {
+    return putReuest('medicines/', data)
+}

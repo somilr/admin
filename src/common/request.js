@@ -31,17 +31,17 @@ export const postReuest = (path, data) => {
 export const deleteReuest = (path, id) => {
     return axiosRequest({
         url: path + id,
-        method: 'DELETE',       
+        method: 'DELETE',
     })
 }
 
-// export const editReuest = (path, data) => {
-//     return axiosRequest({
-//         url: path + data.id,
-//         method: 'PUT', 
-//         headers: {
-//             'Content-Type': 'application/json',
-//           },
-//         body: JSON.stringify(data),      
-//     })
-// }
+export const putReuest = (path, data) => {
+    return axiosRequest({
+        url: path + data.id,
+        method: "PUT",
+        data: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+}
