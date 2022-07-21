@@ -24,6 +24,8 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import MedicationIcon from '@mui/icons-material/Medication';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
+
 
 const drawerWidth = 240;
 
@@ -110,7 +112,9 @@ export default function MiniDrawer({children}) {
     { lable: 'Medicine', icon:<BloodtypeIcon/>, to:"/Medicine" },
     { lable: 'Contact', icon:<ContactPageIcon/>, to:"/Contact"},
     { lable: 'Doctors', icon:<MedicationIcon/>, to:"/Doctors"},
-    { lable: 'Counter', icon:<HourglassBottomIcon/>, to:"/Counter"}
+    { lable: 'Counter', icon:<HourglassBottomIcon/>, to:"/Counter"},
+    { lable: 'PromiseExmple', icon:<HourglassBottomIcon/>, to:"/PromiseExmple"},
+    { lable: 'UsememoExmple', icon:<DataSaverOnIcon/>, to:"/UsememoExmple"}
   ]
 
   return (

@@ -11,6 +11,8 @@ import {Provider} from "react-redux"
 import { configureStore } from "./redux/Store";
 import Counter from './Containers/Counter/Counter';
 import { PersistGate } from 'redux-persist/integration/react'
+import PromiseExmple from './Containers/PromiseExmple';
+import UsememoExmple from './Containers/UsememoExmple';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route exact path={"/Contact"} component={Contact} /> 
         <Route exact path={"/Doctors"} component={Doctors} />
         <Route exact path={"/Contact"} component={Counter} />
+        <Route exact path={"/PromiseExmple"} component={PromiseExmple} />
+        <Route exact path={"/UsememoExmple"} component={UsememoExmple} />
         <Counter />
       </Switch>
     </MiniDrawer>
