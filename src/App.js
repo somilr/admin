@@ -13,6 +13,7 @@ import Counter from './Containers/Counter/Counter';
 import { PersistGate } from 'redux-persist/integration/react'
 import PromiseExmple from './Containers/PromiseExmple';
 import UsememoExmple from './Containers/UsememoExmple';
+import UseCallBackep from './Containers/UseCallBackep';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route exact path={"/Contact"} component={Counter} />
         <Route exact path={"/PromiseExmple"} component={PromiseExmple} />
         <Route exact path={"/UsememoExmple"} component={UsememoExmple} />
+        <Route exact path={"/UseCallBackep"} component={UseCallBackep} />
         <Counter />
       </Switch>
     </MiniDrawer>

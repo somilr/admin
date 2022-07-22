@@ -25,6 +25,8 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import MedicationIcon from '@mui/icons-material/Medication';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 
 const drawerWidth = 240;
@@ -114,7 +116,8 @@ export default function MiniDrawer({children}) {
     { lable: 'Doctors', icon:<MedicationIcon/>, to:"/Doctors"},
     { lable: 'Counter', icon:<HourglassBottomIcon/>, to:"/Counter"},
     { lable: 'PromiseExmple', icon:<HourglassBottomIcon/>, to:"/PromiseExmple"},
-    { lable: 'UsememoExmple', icon:<DataSaverOnIcon/>, to:"/UsememoExmple"}
+    { lable: 'UsememoExmple', icon:<DataSaverOnIcon/>, to:"/UsememoExmple"},
+    { lable: 'UseCallBackep', icon:<ArrowForwardIcon/>, to:"/UseCallBackep"}
   ]
 
   return (
