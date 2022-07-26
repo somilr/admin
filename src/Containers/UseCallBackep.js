@@ -18,7 +18,7 @@ export default function UseCallBackep(props) {
 
   const getItem = useCallback(
     (i) => {
-      return [i + number, i + number + 1, i + number + 2]
+      return [i + number, i + number + 1, i + number + 2, i+number+3,i+number+4, i+number+5, i+number+6, i+number+7, i+number+8, i+number+9, i+number+10]
     },
     [number]
   );

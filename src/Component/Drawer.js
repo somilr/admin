@@ -26,12 +26,16 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ThemeContext from '../Context/ThemeContext';
 
 
 
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
+  const them =  useContext(ThemeContext)
+
+
   width: drawerWidth,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -140,6 +144,7 @@ export default function MiniDrawer({children}) {
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
+          <button onClick={() => them.toogle_theme(them .theme)}>theme</button>
         </Toolbar>
 
       </AppBar>
