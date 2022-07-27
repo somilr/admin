@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -30,12 +30,13 @@ import ThemeContext from '../Context/ThemeContext';
 
 
 
+
+
 const drawerWidth = 240;
 
+
+
 const openedMixin = (theme) => ({
-  const them =  useContext(ThemeContext)
-
-
   width: drawerWidth,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -101,8 +102,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({children}) {
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const them =  useContext(ThemeContext)
+  console.log(them);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -144,7 +148,12 @@ export default function MiniDrawer({children}) {
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
-          <button onClick={() => them.toogle_theme(them .theme)}>theme</button>
+          <button className='btn -btn-light btn-dark' onClick={() => them.toogle_theme(them.them)}>
+            theme
+          </button>
+          <button className={`btn -btn-light btn-dark ${them.them}`}>
+            theme
+          </button>
         </Toolbar>
 
       </AppBar>

@@ -14,30 +14,33 @@ import { PersistGate } from 'redux-persist/integration/react'
 import PromiseExmple from './Containers/PromiseExmple';
 import UsememoExmple from './Containers/UsememoExmple';
 import UseCallBackep from './Containers/UseCallBackep';
+import ThemeContext, { ThemeProvider } from './Context/ThemeContext';
 
 
 function App() {
   const { store, persistor } = configureStore()
   return (
     <>
-    <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-    <MiniDrawer>
-      <Switch>
-        <Route exact path={"/"} component={Home} /> 
-        <Route exact path={"/About"} component={About} />
-        <Route exact path={"/Medicine"} component={Medicine} /> 
-        <Route exact path={"/Contact"} component={Contact} /> 
-        <Route exact path={"/Doctors"} component={Doctors} />
-        <Route exact path={"/Contact"} component={Counter} />
-        <Route exact path={"/PromiseExmple"} component={PromiseExmple} />
-        <Route exact path={"/UsememoExmple"} component={UsememoExmple} />
-        <Route exact path={"/UseCallBackep"} component={UseCallBackep} />
-        <Counter />
-      </Switch>
-    </MiniDrawer>
-    </PersistGate>
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+      <MiniDrawer>
+        <Switch>
+          <Route exact path={"/"} component={Home} /> 
+          <Route exact path={"/About"} component={About} />
+          <Route exact path={"/Medicine"} component={Medicine} /> 
+          <Route exact path={"/Contact"} component={Contact} /> 
+          <Route exact path={"/Doctors"} component={Doctors} />
+          <Route exact path={"/Contact"} component={Counter} />
+          <Route exact path={"/PromiseExmple"} component={PromiseExmple} />
+          <Route exact path={"/UsememoExmple"} component={UsememoExmple} />
+          <Route exact path={"/UseCallBackep"} component={UseCallBackep} />
+          <Counter />
+        </Switch>
+      </MiniDrawer>
+      </PersistGate>
+      </Provider>
+    </ThemeProvider>
     </>
   );
 }

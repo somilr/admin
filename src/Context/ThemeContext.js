@@ -6,29 +6,29 @@ import { themeRenderer } from "./reducer/theme.reducer";
 const ThemeContext = createContext();
 
 const initVal = {
-    theme:'light'
+    them: 'light'
 }
 
-export const ThemeProvider = ({children}) => {
-    const [state, dispatch] = useReducer(themeRenderer, initVal); 
+export const ThemeProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(themeRenderer, initVal);
+
+
+const toogle_theme = (them) => {
+
+    const newTheme = them === 'light' ? 'dark' : 'light';
+    dispatch({ type: ActionTypes.TOOGLE_THEME, payload: newTheme });
 }
-
-const toogle_theme = (theme) => {
-     
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    dispatch({type: ActionTypes.TOOGLE_THEME, payload: newTheme});
-
     return (
-        <ThemeContextprovider
-            {
+        <ThemeContext.Provider
+            value = {{
                 ...state,
-                toogle_theme()
-            }
+                toogle_theme
+            }}
         >
             {children}
-        </ThemeContextprovider>
+        </ThemeContext.Provider>
     )
-    
+
 }
 
 

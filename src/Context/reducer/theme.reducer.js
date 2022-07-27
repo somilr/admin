@@ -6,7 +6,7 @@ export const  themeRenderer = (state, action) => {
     case ActionTypes.TOOGLE_THEME:
         return {
             ...state,
-            theme: action.payload
+            them: action.payload
         }
         default:
             return state
