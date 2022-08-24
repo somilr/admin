@@ -7,6 +7,6 @@ export const rootReducer = combineReducers({
     counter: counterReducer,
     medicine:medicineReducer,
     doctors:doctorsReducer
-    ,
+    
 
 })

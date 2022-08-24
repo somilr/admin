@@ -23,7 +23,7 @@ export const doctorsReducer = (state = initalState, action) => {
                 doctors: action.payload,
                 error: ''
             }
-        case ActionTypes.POST_DOCRORS:
+        case ActionTypes.POST_DOCTORS:
             return {
                 ...state,
                 isLoading: false,

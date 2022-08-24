@@ -152,7 +152,7 @@ export default function MiniDrawer({children}) {
             theme
           </button>
           <button className={`btn -btn-light btn-dark ${them.them}`}>
-            theme
+         Color
           </button>
         </Toolbar>
 

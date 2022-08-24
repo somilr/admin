@@ -26,7 +26,7 @@ export default function Doctors() {
   const [did, setDid] = useState()
 
   const doctorda = useSelector(state => state.doctors)
-  console.log(doctorda.isLoading);
+  // console.log(doctorda.isLoading);
 
   const handleClickDopen = (id) => {
     setDopen(true);

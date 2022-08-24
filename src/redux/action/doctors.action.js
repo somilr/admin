@@ -1,6 +1,8 @@
 // import { BASE_URL } from "../../baseUrl";
 import { getDoctorsdata, deleteDoctorsdata, editDoctorsdata, postDoctorsdata } from "../../common/apis/doctors.api";
+import { db } from "../../Firebase";
 import * as ActionTypes from "../ActionType"
+import { collection, addDoc } from "firebase/firestore"; 
 
 export const Doctorsdata = () => (dispatch) => {
   try {
@@ -39,14 +41,15 @@ export const Doctorsdata = () => (dispatch) => {
   }
 }
 
-export const postDoctors = (data) => (dispatch) => {
+
+export const postDoctors = (data) => async (dispatch) => {
   try {
 
     dispatch(loadingDoctors())
 
     postDoctorsdata(data)
-      .then((data) => dispatch({ type: ActionTypes.POST_DOCRORS, payload: data.data }))
-
+      .then((data) =>  dispatch({ type: ActionTypes.POST_DOCTORS, payload: data.data }))
+      const docRef = await addDoc(collection(db, " doctors"),{id:docRef, ...data});
     // setTimeout(function () {
     //   fetch(BASE_URL + 'doctors', {
     //     method: 'POST', // or 'PUT'
@@ -73,7 +76,8 @@ export const postDoctors = (data) => (dispatch) => {
     //     .catch(error => dispatch(errorDoctors(error.message)))
     // }, 2000)
   } catch (error) {
-    dispatch(errorDoctors(error.message))
+    dispatch(errorDoctors(error.message));
+    console.error("Error adding document: ", error);
   }
 }
 
