@@ -184,7 +184,7 @@ export default function Doctors() {
   useEffect(
     () => {
        dispatch(Doctorsdata())
-      loadData()
+      // loadData()
     },
     [])
 
