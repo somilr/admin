@@ -17,19 +17,11 @@
   ],
   "doctors": [
     {
-      "name": "azdsd",
-      "salary": "rtre",
+      "name": "somil1",
+      "salary": "342311",
       "quantity": "",
-      "experience": "rtrde",
-      "degree": "rtr",
-      "id": 6
-    },
-    {
-      "name": "somil",
-      "salary": "3423",
-      "quantity": "",
-      "experience": "3423",
-      "degree": "frgdf",
+      "experience": "34231111",
+      "degree": "frgdf111",
       "id": 52
     },
     {
@@ -39,6 +31,14 @@
       "experience": "setfcvgbhjnkm,",
       "degree": "tfvgbhjnk",
       "id": 53
+    },
+    {
+      "name": "abc",
+      "salary": "fghf",
+      "quantity": "",
+      "experience": "fghfh",
+      "degree": "mb",
+      "id": 54
     }
   ],
   "profile": {

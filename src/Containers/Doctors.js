@@ -52,6 +52,7 @@ export default function Doctors() {
     salary: yup.string().required('please enter salary'),
     degree: yup.string().required('please enter degree'),
     experience: yup.string().required('please enter experience'),
+    file: yup.mixed().required('please select file'),
   }
 
 
@@ -60,13 +61,14 @@ export default function Doctors() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      salary:'',
-      quantity:'',
-      experience: ''
+      salary: '',
+      quantity: '',
+      experience: '',
+      file: ''
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
-      if(Update) {
+      if (Update) {
         handleupdate(value)
       } else {
         handleSubmitdata(value)
@@ -77,7 +79,7 @@ export default function Doctors() {
 
   const handleupdate = (value) => {
     // let localdata = JSON.parse(localStorage.getItem("doctors"));
-    
+
     // let udata = localdata.map((l, i) => {
     //   if(l.id === value.id) {
     //       return value;
@@ -147,7 +149,7 @@ export default function Doctors() {
     }
   ];
 
-  
+
 
   const handleEdit = (data) => {
     setOpen(true);
@@ -165,7 +167,7 @@ export default function Doctors() {
 
     dispatch(deleteDoctors(did))
 
-    loadData() 
+    loadData()
     setDopen(false)
   }
 
@@ -175,15 +177,15 @@ export default function Doctors() {
     // if (localData !== null) {
     //   setData(localData)
     // }
-    
+
     setData(doctorda.doctors)
   }
 
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(
     () => {
-       dispatch(Doctorsdata())
+      dispatch(Doctorsdata())
       // loadData()
     },
     [])
@@ -264,13 +266,27 @@ export default function Doctors() {
                     helperText={formik.errors.experience}
                     error={formik.errors.experience ? true : false}
                   />
+                  <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    fullWidth
+                    variant="standard"
+                    onChange={e => formik.setFieldValue("file", e.target.files[0])}
+                  
+                  />
+                  {
+                   <p style={{color:"red"}}>
+                    {formik.errors.file && formik.errors.file}
+                   </p> 
+                  }
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     {
                       Update ?
-                      <Button type="submit">Update</Button>
-                       :
-                      <Button type="submit">Submit</Button>
+                        <Button type="submit">Update</Button>
+                        :
+                        <Button type="submit">Submit</Button>
                     }
                   </DialogActions>
                 </DialogContent>
@@ -278,26 +294,26 @@ export default function Doctors() {
             </Formik>
           </Dialog>
           <div>
-      <Dialog
-        open={dopen}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are You Sure Delete doctors Data ...? "}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-         
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleDelete()} autofocus>yes</Button>
-          <Button onClick={handleClose}>No</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+            <Dialog
+              open={dopen}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Are You Sure Delete doctors Data ...? "}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => handleDelete()} autofocus>yes</Button>
+                <Button onClick={handleClose}>No</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </div>
       </Container>
     </Box>

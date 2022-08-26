@@ -1,8 +1,10 @@
 // import { BASE_URL } from "../../baseUrl";
 import { getDoctorsdata, deleteDoctorsdata, editDoctorsdata, postDoctorsdata } from "../../common/apis/doctors.api";
-import { db } from "../../Firebase";
+import { db, storage } from "../../Firebase";
 import * as ActionTypes from "../ActionType"
-import { collection, addDoc, getDocs, deleteDoc, doc, deleteField, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, deleteField, updateDoc  } from "firebase/firestore";
+import { getDownloadURL, ref,uploadBytes  } from "firebase/storage";
+import { async } from "@firebase/util";
 
 export const Doctorsdata = () => async (dispatch) => {
   try {
@@ -59,8 +61,33 @@ export const postDoctors = (data) => async (dispatch) => {
 
     //  const docRef = await addDoc(collection(db, " doctors"),{id:docRef.id, ...data});
 
-    const docRef = await addDoc(collection(db, "doctors"), data);
-    dispatch({ type: ActionTypes.POST_DOCTORS, payload: { id: docRef.id, ...data } })
+    const doctorsRef = ref(storage, 'doctors/'+data.file.name);
+    
+    uploadBytes(doctorsRef, data.file)
+    .then((snapshot) => {
+      // console.log('Uploaded a blob or file!');
+      getDownloadURL(snapshot.ref)
+      .then(  async (url) => {
+         const docRef = await addDoc(collection(db, "doctors"), {
+          degree: data.degree,
+          experience: data.experience,
+          name: data.name,
+          salary: data.salary,
+          url: url
+         });
+         dispatch({ type: ActionTypes.POST_DOCTORS, payload: {
+          degree: data.degree,
+          experience: data.experience,
+          name: data.name,
+          salary: data.salary,
+          url: url
+         } })
+      })
+    });
+    
+
+
+   
     // console.log("Document written with ID: ", docRef.id);
     // setTimeout(function () {
     //   fetch(BASE_URL + 'doctors', {
