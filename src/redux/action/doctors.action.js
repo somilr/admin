@@ -2,8 +2,8 @@
 import { getDoctorsdata, deleteDoctorsdata, editDoctorsdata, postDoctorsdata } from "../../common/apis/doctors.api";
 import { db, storage } from "../../Firebase";
 import * as ActionTypes from "../ActionType"
-import { collection, addDoc, getDocs, deleteDoc, doc, deleteField, updateDoc  } from "firebase/firestore";
-import { getDownloadURL, ref,uploadBytes  } from "firebase/storage";
+import { collection, addDoc, getDocs, deleteDoc, doc, deleteField, updateDoc } from "firebase/firestore";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { async } from "@firebase/util";
 
 export const Doctorsdata = () => async (dispatch) => {
@@ -60,34 +60,39 @@ export const postDoctors = (data) => async (dispatch) => {
 
 
     //  const docRef = await addDoc(collection(db, " doctors"),{id:docRef.id, ...data});
+    const rendomName = Math.floor(Math.random() * 10000000).toString();
+    const doctorsRef = ref(storage, 'doctors/' + rendomName);
 
-    const doctorsRef = ref(storage, 'doctors/'+data.file.name);
-    
     uploadBytes(doctorsRef, data.file)
-    .then((snapshot) => {
-      // console.log('Uploaded a blob or file!');
-      getDownloadURL(snapshot.ref)
-      .then(  async (url) => {
-         const docRef = await addDoc(collection(db, "doctors"), {
-          degree: data.degree,
-          experience: data.experience,
-          name: data.name,
-          salary: data.salary,
-          url: url
-         });
-         dispatch({ type: ActionTypes.POST_DOCTORS, payload: {
-          degree: data.degree,
-          experience: data.experience,
-          name: data.name,
-          salary: data.salary,
-          url: url
-         } })
-      })
-    });
-    
+      .then((snapshot) => {
+        // console.log('Uploaded a blob or file!');
+        getDownloadURL(snapshot.ref)
+          .then(async (url) => {
+            const docRef = await addDoc(collection(db, "doctors"), {
+              degree: data.degree,
+              experience: data.experience,
+              name: data.name,
+              salary: data.salary,
+              url: url,
+              FileName: rendomName
+            });
+            dispatch({
+              type: ActionTypes.POST_DOCTORS, payload: {
+                id: docRef.id,
+                degree: data.degree,
+                experience: data.experience,
+                name: data.name,
+                salary: data.salary,
+                url: url,
+                FileName: rendomName
+              }
+            })
+          })
+      });
 
 
-   
+
+
     // console.log("Document written with ID: ", docRef.id);
     // setTimeout(function () {
     //   fetch(BASE_URL + 'doctors', {
@@ -120,22 +125,27 @@ export const postDoctors = (data) => async (dispatch) => {
   }
 }
 
-export const deleteDoctors = (id) => async (dispatch) => {
+export const deleteDoctors = (data) => async (dispatch) => {
+
   try {
+    console.log(data);
+    const doctorsRef = ref(storage, 'doctors/' + data.FileName);
 
-    deleteDoctorsdata(id)
-    // .then(dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: id }))
-    // .catch(error => dispatch(errorDoctors(error.message)))
+    deleteObject(doctorsRef).then(
+      async () => {
+        await deleteDoc(doc(db, "doctors", data.id));
+        
+        dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: data.id })
+      }).catch((error) => {
+        dispatch(errorDoctors(error.message))
+      });
 
-    await deleteDoc(doc(db, "doctors", id));
-
-    const doctorsRef = doc(db, 'doctors', id);
-
-    // Remove the 'capital' field from the document
-    await updateDoc(doctorsRef, {
-      capital: deleteField()
-    });
-    dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: id})
+    // await deleteDoc(doc(db, "doctors", id));
+    // const doctorsRef = doc(db, 'doctors', id);
+    // await updateDoc(doctorsRef, {
+    //   capital: deleteField()
+    // });
+    // dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: id})
 
     // fetch(BASE_URL + 'doctors/' + id , {
     //   method: 'DELETE'
@@ -174,10 +184,10 @@ export const editDotors = (data) => async (dispatch) => {
       name: data.name,
       salary: data.salary
     });
-    dispatch({ type: ActionTypes.EDIT_DOCTORS, payload: data})
+    dispatch({ type: ActionTypes.EDIT_DOCTORS, payload: data })
 
-      // .then((data) => dispatch({ type: ActionTypes.EDIT_DOCTORS, payload: data.data }))
-      // .catch(error => dispatch(errorDoctors(error.message)))
+    // .then((data) => dispatch({ type: ActionTypes.EDIT_DOCTORS, payload: data.data }))
+    // .catch(error => dispatch(errorDoctors(error.message)))
 
     // fetch(BASE_URL + 'doctors/' + data.id , {
     //   method: 'PUT',

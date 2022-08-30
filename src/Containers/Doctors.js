@@ -62,7 +62,7 @@ export default function Doctors() {
     initialValues: {
       name: '',
       salary: '',
-      quantity: '',
+      degree: '',
       experience: '',
       file: ''
     },
@@ -127,11 +127,18 @@ export default function Doctors() {
     { field: 'salary', headerName: ' Salary', width: 130 },
     { field: 'degree', headerName: 'Degree', width: 130 },
     { field: 'experience', headerName: 'Experience', width: 130 },
+    { field: 'url', headerName: 'image', width: 130,
+
+      renderCell: (params) => (
+        <img  src={params.row.url} width={50} height={50} />
+      )
+
+    },
     {
       field: 'delete', headerName: 'Delete', width: 130,
       renderCell: (params) => (
         <>
-          <IconButton aria-label="delete" onClick={() => handleClickDopen(params.row.id)}>
+          <IconButton aria-label="delete" onClick={() => {setDid(params.row); handleClickDopen(params.row)}}>
             <DeleteIcon />
           </IconButton>
         </>
