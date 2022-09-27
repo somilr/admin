@@ -84,10 +84,7 @@ export const postDoctors = (data) => async (dispatch) => {
          } })
       })
     });
-    
-
-
-   
+      
     // console.log("Document written with ID: ", docRef.id);
     // setTimeout(function () {
     //   fetch(BASE_URL + 'doctors', {
